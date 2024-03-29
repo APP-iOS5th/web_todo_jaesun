@@ -8,6 +8,11 @@
       rel="stylesheet"
       crossorigin="anonymous"
     />
+    <style>
+       #completeTodoList{
+        text-decoration-line: line-through;
+      }
+    </style>
     <title>Todo list</title>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
@@ -76,29 +81,13 @@
           var completeItem = document.createElement("li");
           completeItem.innerHTML = text;
           completeItem.classList.add("list-group-item");
-          completeList .append(completeItem);
+          completeList.append(completeItem);
           item.parentNode.removeChild(item);
           storeTodos();
         });
 
         list.appendChild(item);
       }
-
-      // function addCompleteTodo(text) {
-      //   var list = document.getElementById("completeTodoList");
-
-      //   var item = document.createElement("li");
-      //   item.innerHTML = text;
-      //   item.classList.add("list-group-item");
-
-      //   var removeButton = document.createElement("button");
-      //   removeButton.innerText = "Remove";
-      //   removeButton.classList.add("btn", "btn-danger", "btn-sm", "float-end");
-      //   removeButton.addEventListener("click", function () {
-      //     item.parentNode.removeChild(item);
-      //     storeTodos();
-      //   });
-      // }
 
       function storeTodos() {
         var todos = [];
