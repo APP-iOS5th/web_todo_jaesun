@@ -42,11 +42,10 @@
               id="btnTodoList"
             ></div>
           </div>
-          
-          <!-- <div class="complete">
+          <div class="complete">
             <h1 class="mt-5 text-center">complete</h1>
-            <ul class="list-group" id="completetodoList"></ul>
-          </div> -->
+            <ul class="list-group" id="completeTodoList"></ul>
+          </div>
         </div>
       </div>
     </div>
@@ -55,6 +54,7 @@
       document.addEventListener("DOMContentLoaded", function () {
         loadTodos();
       });
+
       document.getElementById("addTodo").addEventListener("click", function () {
         var value = document.getElementById("todoInput").value;
         if (value && value != "") {
@@ -63,6 +63,7 @@
           storeTodos();
         }
       });
+
       function addTodoBtn(text) {
         var list = document.getElementById("btnTodoList");
 
@@ -70,37 +71,39 @@
         item.innerHTML = text;
         item.classList.add("btn", "btn-outline-primary");
         item.addEventListener("click", function () {
-            // addCompleteTodo(text);
-            item.parentNode.removeChild(item);
-            
+          var completeList = document.getElementById("completeTodoList");
+
+          var completeItem = document.createElement("li");
+          completeItem.innerHTML = text;
+          completeItem.classList.add("list-group-item");
+          completeList .append(completeItem);
+          item.parentNode.removeChild(item);
           storeTodos();
         });
 
         list.appendChild(item);
       }
 
-    //   function addCompleteTodo(text) {
-    //     var list = document.getElementById("todoList");
+      // function addCompleteTodo(text) {
+      //   var list = document.getElementById("completeTodoList");
 
-    //     var item = document.createElement("li");
-    //     item.innerHTML = text;
-    //     item.classList.add("list-group-item");
+      //   var item = document.createElement("li");
+      //   item.innerHTML = text;
+      //   item.classList.add("list-group-item");
 
-    //     var removeButton = document.createElement("button");
-    //     removeButton.innerText = "Remove";
-    //     removeButton.classList.add("btn", "btn-danger", "btn-sm", "float-end");
-    //     removeButton.addEventListener("click", function () {
-    //       item.parentNode.removeChild(item);
-    //       storeTodos();
-    //     });
-    //   }
+      //   var removeButton = document.createElement("button");
+      //   removeButton.innerText = "Remove";
+      //   removeButton.classList.add("btn", "btn-danger", "btn-sm", "float-end");
+      //   removeButton.addEventListener("click", function () {
+      //     item.parentNode.removeChild(item);
+      //     storeTodos();
+      //   });
+      // }
 
       function storeTodos() {
         var todos = [];
         for (var i = 0; i < btnTodoList.children.length; i++) {
-          todos.push(
-            btnTodoList.children[i].innerText
-          );
+          todos.push(btnTodoList.children[i].innerText);
         }
         localStorage.setItem("todos", JSON.stringify(todos));
       }
